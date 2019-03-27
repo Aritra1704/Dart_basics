@@ -1,0 +1,61 @@
+import 'dart:math';
+
+Shape shapeFactory(String type) {
+	if(type == 'circle') return Circle(2);
+  if(type == 'square') return Square(2);
+  throw 'Can\'t create type';
+}
+
+class Rectangle {
+  int width;
+  int height;
+  Point origin;
+  
+  Rectangle({this.origin = const Point(0,0), this.width = 0, this.height = 0});
+  
+  @override
+  toString() =>
+    'Origin: (${origin.x}, ${origin.y}), width = $width, height = $height';
+}
+
+// abstract class Shape {
+//   num get area;
+// }
+
+abstract class Shape {
+  factory Shape(String type) {
+    if(type == 'circle') return Circle(3);
+    if(type == 'square') return Square(2);
+    throw 'Can\'t create type'; 
+	}
+  num get area;
+}
+
+class Circle implements Shape {
+  final num radius;
+ 	Circle(this.radius);
+  num get area => pi * pow(radius, 2);
+}
+
+class Square implements Shape {
+  final num side;
+  Square(this.side);
+  num get area => pow(side, 2);
+}
+
+main() {
+  final circle = shapeFactory('circle');
+  final square = shapeFactory('square');
+  print(circle.area);
+  print(square.area);
+  
+//     print(Rectangle(origin: const Point(10, 20), width: 100, height: 200));
+//   	print(Rectangle(origin: const Point(10, 10)));
+//   	print(Rectangle(width: 200));
+//   	print(Rectangle());
+  
+//   final circle = Circle(2);
+//   final square = Square(2);
+//   print(circle.area);
+//   print(square.area);
+} // Included main() to suppress uncaught exception.
